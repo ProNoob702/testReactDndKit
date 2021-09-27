@@ -10,7 +10,8 @@ import {
   useSortable,
   arrayMove,
   SortableContext,
-  verticalListSortingStrategy,
+  horizontalListSortingStrategy,
+  rectSortingStrategy,
 } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 
@@ -26,7 +27,7 @@ function App() {
     },
     {
       id: "3",
-      name: "Ronaldo",
+      name: "VBR",
     },
     {
       id: "4",
@@ -35,6 +36,29 @@ function App() {
     {
       id: "5",
       name: "Jamie",
+    },
+  ]);
+
+  const [items2, setItems2] = useState([
+    {
+      id: "6",
+      name: "Dalo",
+    },
+    {
+      id: "7",
+      name: "Bongo",
+    },
+    {
+      id: "8",
+      name: "Zingo",
+    },
+    {
+      id: "9",
+      name: "VVE",
+    },
+    {
+      id: "10",
+      name: "RGD",
     },
   ]);
 
@@ -63,14 +87,26 @@ function App() {
         collisionDetection={closestCenter}
         onDragEnd={handleDragEnd}
       >
-        <SortableContext
-          items={items.map((item) => item.id)}
-          strategy={verticalListSortingStrategy}
-        >
-          {items.map((item) => (
-            <UserComponent {...item} key={item.id} />
-          ))}
-        </SortableContext>
+        <div className="flexRow">
+          <SortableContext
+            items={[
+              ...items.map((item) => item.id),
+              ...items2.map((item) => item.id),
+            ]}
+            strategy={rectSortingStrategy}
+          >
+            <div className="flexColumn">
+              {items.map((item) => (
+                <UserComponent {...item} key={item.id} />
+              ))}
+            </div>
+            <div className="flexColumn">
+              {items2.map((item) => (
+                <UserComponent {...item} key={item.id} />
+              ))}
+            </div>
+          </SortableContext>
+        </div>
       </DndContext>
     </div>
   );

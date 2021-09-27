@@ -36,3 +36,15 @@
     transform: rotate(360deg);
   }
 }
+
+.flexRow {
+  display: flex;
+}
+
+.flexColumn {
+  display: flex;
+  flex-direction: column;
+  border: 2px solid black;
+  margin: 5px;
+  padding: 5px;
+}
